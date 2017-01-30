@@ -5,10 +5,6 @@ spring:
     url: jdbc:mysql://localhost:3306/YanYPro?useUnicode=true&characterEncoding=UTF-8&&useSSL=false
     username: root
     password: 123qwe
-
-#    url: jdbc:mysql://192.168.102.206:3306/gis?useUnicode=true&characterEncoding=UTF-8
-#    username: root
-#    password: mysql
     driver-class-name: com.mysql.jdbc.Driver
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
