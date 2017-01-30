@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "com.yany")
-@MapperScan(value="com.yany.mapper")
 @Configuration
 public class Application {
     public static void main(String[] args) {
