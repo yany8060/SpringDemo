@@ -1,6 +1,8 @@
 package com.yany.configure.mybatis.single;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.github.pagehelper.PageHelper;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +16,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import com.github.pagehelper.PageInterceptor;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 
 
 /**
@@ -91,6 +95,17 @@ public class SingleMyBatisConfig implements EnvironmentAware {
 
         PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver = new PathMatchingResourcePatternResolver();
         sqlSessionFactoryBean.setMapperLocations(pathMatchingResourcePatternResolver.getResources(MAPPER_PATH));
+
+        //TODO
+        PageInterceptor pageInterceptor = new PageInterceptor();
+        Properties properties = new Properties();
+//        properties.setProperty("dialect", "mysql");
+        properties.setProperty("reasonable", "false");
+        properties.setProperty("pageSizeZero", "true");
+        pageInterceptor.setProperties(properties);
+
+
+        sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor});
         return sqlSessionFactoryBean;
     }
 

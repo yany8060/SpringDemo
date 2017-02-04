@@ -1,11 +1,14 @@
 package com.yany.dao;
 
+import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
 import com.yany.Application;
 import com.yany.dao.multi.ads.AdsDao;
 import com.yany.dao.multi.annotation.AnnotationAdsDao;
 import com.yany.dao.multi.annotation.AnnotationRdsDao;
 import com.yany.dao.multi.rds.RdsDao;
 import com.yany.dao.single.UseDao;
+import com.yany.module.UserModel;
 import com.yany.service.IAdsAopService;
 import com.yany.service.IRdsAopService;
 import org.junit.Test;
@@ -14,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by yanyong on 2017/1/30.
@@ -65,6 +69,10 @@ public class ARdsDaoTest {
         System.out.println("annotationRdsCount: " + annotationRdsCount);
         System.out.println("annotationAdsCount: " + annotationAdsCount);
 
+
+        PageHelper.startPage(2, 1);
+        List<UserModel> userModels = useDao.selectUsers();
+        System.out.println(JSON.toJSONString(userModels));
     }
 
 }

@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yany.dao.multi.ads.AdsDao">
     <select id="selectCount" resultType="Integer">
---         SELECT COUNT(1) FROM applicat_gis_day;
-        SELECT COUNT(1) FROM users;
+        SELECT COUNT(1) FROM users
     </select>
 </mapper>
