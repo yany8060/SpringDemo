@@ -1,7 +1,6 @@
 package com.yany.configure.mybatis.single;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
@@ -99,7 +98,6 @@ public class SingleMyBatisConfig implements EnvironmentAware {
         //TODO
         PageInterceptor pageInterceptor = new PageInterceptor();
         Properties properties = new Properties();
-//        properties.setProperty("dialect", "mysql");
         properties.setProperty("reasonable", "false");
         properties.setProperty("pageSizeZero", "true");
         pageInterceptor.setProperties(properties);
