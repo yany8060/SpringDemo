@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- Error Log Appender -->
+    <appender name="catalinaAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="File" value="${catalina.home}/logs/SpringWar/catalina.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <param name="threshold" value="ALL"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} %5p [%t] (%F:%L) (%C:%M) - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMax" value="FATAL"/>
+            <param name="LevelMin" value="DEBUG"/>
+        </filter>
+    </appender>
+
+    <appender name="errorAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="File" value="${catalina.home}/logs/SpringWar/error.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <param name="threshold" value="WARN"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} %5p [%t] (%F:%L) (%C:%M) - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMax" value="ERROR"/>
+            <param name="LevelMin" value="WARN"/>
+        </filter>
+    </appender>
+
+    <!-- Application Log Appender -->
+    <appender name="infoAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="File" value="${catalina.home}/logs/SpringWar/SpringWar.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <param name="threshold" value="INFO"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} %5p [%t] (%F:%L) (%C:%M) - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMax" value="INFO"/>
+            <param name="LevelMin" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- Fop Performance Log appender -->
+    <appender name="accessAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="File" value="${catalina.home}/logs/SpringWar/access.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- Fop Performance Log appender -->
+    <appender name="performanceAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="File" value="${catalina.home}/logs/SpringWar/performance.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- Console -->
+    <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p: %c - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="traceAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <param name="File" value="${catalina.home}/logs/SpringWar/trace.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <param name="threshold" value="INFO"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} [%t] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMax" value="INFO"/>
+            <param name="LevelMin" value="INFO"/>
+        </filter>
+    </appender>
+
+
+    <!-- performance logger -->
+    <logger name="perf" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="performanceAppender"/>
+    </logger>
+
+    <!-- access logger -->
+    <logger name="access" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="accessAppender"/>
+    </logger>
+
+    <!-- trace logger -->
+    <logger name="trace" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="traceAppender"/>
+    </logger>
+
+    <category name="org.springframework">
+        <level value="INFO"/>
+        <appender-ref ref="infoAppender"/>
+        <appender-ref ref="errorAppender"/>
+    </category>
+
+    <category name="org.mongodb.driver.cluster">
+        <level value="INFO"/>
+    </category>
+
+    <root>
+        <level value="ALL"/>
+        <appender-ref ref="consoleAppender"/>
+    </root>
+
+</log4j:configuration>

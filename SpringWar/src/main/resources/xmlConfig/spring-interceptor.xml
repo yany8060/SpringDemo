@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <bean id="customerAnnotaionScan" class="com.yany.common.filter.context.CustomerAnnotaionScan">
+        <property name="basePackage" value="com.yany.controller"/>
+    </bean>
+
+
+    <mvc:annotation-driven/>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/><!--拦截所有controller-->
+            <mvc:exclude-mapping path="/gisData/**"/>
+            <mvc:exclude-mapping path="/delivery/**"/>
+            <mvc:exclude-mapping path="/kafka/**"/>
+            <mvc:exclude-mapping path="/proxy_person/**"/>
+            <mvc:exclude-mapping path="/api/**"/>
+            <bean class="com.yany.common.filter.interceptror.MVCInterceptror">
+                <property name="redirectUrl" value="/TianlianApi/dbcenter/fail.do"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

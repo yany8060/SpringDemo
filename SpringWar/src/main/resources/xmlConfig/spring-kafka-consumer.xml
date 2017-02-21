@@ -1,0 +1,59 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+       <!--xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka"-->
+       <!--xmlns:int="http://www.springframework.org/schema/integration"-->
+       <!--xmlns:context="http://www.springframework.org/schema/context"-->
+       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+       <!--http://www.springframework.org/schema/beans/spring-beans.xsd-->
+       <!--http://www.springframework.org/schema/integration-->
+       <!--http://www.springframework.org/schema/integration/spring-integration.xsd-->
+       <!--http://www.springframework.org/schema/integration/kafka-->
+       <!--http://www.springframework.org/schema/integration/kafka/spring-integration-kafka.xsd-->
+       <!--http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">-->
+
+    <!--<context:property-placeholder location="classpath:/properties/kafka-config.properties"/>-->
+
+    <!--&lt;!&ndash;<int-kafka:message-driven-channel-adapter&ndash;&gt;-->
+            <!--&lt;!&ndash;id="kafkaMessageDrivenChannelAdapter"&ndash;&gt;-->
+            <!--&lt;!&ndash;listener-container="kafkaMessageListenerContainer"&ndash;&gt;-->
+            <!--&lt;!&ndash;auto-startup="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;phase="100"&ndash;&gt;-->
+            <!--&lt;!&ndash;send-timeout="5000"&ndash;&gt;-->
+            <!--&lt;!&ndash;channel="nullChannel"&ndash;&gt;-->
+            <!--&lt;!&ndash;message-converter="messagingMessageConverter"&ndash;&gt;-->
+            <!--&lt;!&ndash;error-channel="errorChannel"/>&ndash;&gt;-->
+
+    <!--<bean id="messagingMessageConverter" class="org.springframework.kafka.support.converter.MessagingMessageConverter"/>-->
+    <!--<bean id="kafkaConsumerFactory" class="org.springframework.kafka.core.DefaultKafkaConsumerFactory">-->
+        <!--<constructor-arg>-->
+            <!--<map>-->
+                <!--<entry key="bootstrap.servers" value="${kafka.consumer.bootstrap.servers}"/>-->
+                <!--<entry key="group.id" value="${kafka.consumer.group.id}"/>-->
+                <!--<entry key="enable.auto.commit" value="${kafka.consumer.enable.auto.commit}"/>-->
+                <!--<entry key="auto.commit.interval.ms" value="${kafka.consumer.auto.commit.interval.ms}"/>-->
+                <!--<entry key="session.timeout.ms" value="${kafka.consumer.session.timeout.ms}"/>-->
+                <!--<entry key="key.deserializer"-->
+                       <!--value="org.apache.kafka.common.serialization.IntegerDeserializer"/>-->
+                <!--<entry key="value.deserializer"-->
+                       <!--value="org.apache.kafka.common.serialization.StringDeserializer"/>-->
+            <!--</map>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
+    <!--<bean id="kafkaMessageListenerContainer" class="org.springframework.kafka.listener.KafkaMessageListenerContainer"-->
+          <!--init-method="doStart">-->
+        <!--<constructor-arg ref="kafkaConsumerFactory" />-->
+        <!--<constructor-arg ref="containerProperties" />-->
+    <!--</bean>-->
+
+
+    <!--<bean id="messageListernerConsumerService" class="com.yany.common.kafka.bean.impl.KafkaConsumerServiceImpl" />-->
+    <!--&lt;!&ndash; 消费者容器配置信息 &ndash;&gt;-->
+    <!--<bean id="containerProperties" class="org.springframework.kafka.listener.config.ContainerProperties">-->
+        <!--<constructor-arg value="mhb-test"/>-->
+        <!--<property name="messageListener" ref="messageListernerConsumerService"/>-->
+    <!--</bean>-->
+
+
+
+<!--</beans>-->

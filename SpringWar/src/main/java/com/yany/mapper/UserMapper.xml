@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yany.dao.IUserDao">
+
+    <resultMap id="userModelMap" type="com.yany.model.UserModel">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_status" property="userStatus" jdbcType="SMALLINT"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="user_password" property="userPassword" jdbcType="VARCHAR"/>
+        <result column="bs_system" property="bsSystem" jdbcType="CHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="registertime" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="addtime" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="adduser" property="addUser" jdbcType="VARCHAR"/>
+        <result column="modifytime" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="modifyuser" property="modifyUser" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryUsers" resultMap="userModelMap" >
+        SELECT * FROM users
+    </select>
+
+</mapper>
