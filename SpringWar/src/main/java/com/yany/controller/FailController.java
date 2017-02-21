@@ -1,6 +1,7 @@
 package com.yany.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yany.common.aop.log.Log;
 import com.yany.common.filter.annotation.YanYUrl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("fail")
 public class FailController {
 
+
+    @Log(name = "controller")
     @YanYUrl(value = "WHITE")
     @RequestMapping(value = "permissiodnenied", method = RequestMethod.GET)
     @ResponseBody

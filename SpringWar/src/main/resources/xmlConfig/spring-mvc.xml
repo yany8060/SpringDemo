@@ -2,13 +2,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:beans="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:component-scan base-package="com.yany"/>
     <mvc:annotation-driven/>
@@ -18,5 +18,16 @@
         <beans:property name="prefix" value="/WEB-INF/page/"/>
         <beans:property name="suffix" value=".html"/>
     </beans:bean>
+
+    <bean id="logAop" class="com.yany.common.aop.log.LogAop"/>
+
+    <aop:config>
+        <aop:pointcut id="logMethod" expression="execution(* com.yany..*.*(..))"/>
+        <aop:aspect ref="logAop">
+            <aop:around method="doAround" pointcut-ref="logMethod"/>
+            <aop:after-returning method="doReturn" pointcut-ref="logMethod"/>
+        </aop:aspect>
+
+    </aop:config>
 
 </beans>
