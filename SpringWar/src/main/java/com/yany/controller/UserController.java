@@ -31,8 +31,8 @@ public class UserController {
 //    @Resource
 //    JedisClusterFactory jedisClusterFactory;
 
-    @Resource
-    IKafkaProducerService kafkaProducerService;
+//    @Resource
+//    IKafkaProducerService kafkaProducerService;
 
 
     @ResponseBody
@@ -46,7 +46,7 @@ public class UserController {
 
 //        JedisCluster jedisCluster = jedisClusterFactory.getInstance();
 
-        kafkaProducerService.sendMessage("testYanY","ssssss");
+//        kafkaProducerService.sendMessage("testYanY","ssssss");
 
 
         return JSON.toJSONString(userModelList);

@@ -14,7 +14,7 @@
 
     <import resource="classpath:/xmlConfig/spring-db.xml"/>
     <!--<import resource="classpath:/xmlConfig/mongo-config.xml"/>-->
-    <import resource="classpath:/xmlConfig/spring-kafka-producer.xml"/>
+    <!--<import resource="classpath:/xmlConfig/spring-kafka-producer.xml"/>-->
     <!--<import resource="classpath:/xmlConfig/spring-kafka-consumer.xml" />-->
     <import resource="classpath:/xmlConfig/spring-interceptor.xml"/>
 

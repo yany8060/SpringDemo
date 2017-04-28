@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 /**
  * Created by yanyong on 2017/2/14.
  */
-@Component
+//@Component
 public class KafkaProducerServiceImpl implements IKafkaProducerService {
 
     @Resource
