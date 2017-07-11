@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
     <context:property-placeholder location="classpath:/properties/dbconn.properties"/>
@@ -34,7 +34,6 @@
         <property name="configLocation" value="classpath:/xmlConfig/mybatis-config.xml"></property>
         <property name="mapperLocations"
                   value="classpath*:com/yany/mapper/*.xml"></property>
-
     </bean>
 
     <!-- 扫描包下的Mapper ,生成 beans -->
@@ -47,5 +46,64 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="mysqlDataSource"/>
     </bean>
+
+
+    <!-- 配置数据源 -->
+    <bean name="adsDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="driverClassName" value="${ads.jdbc.driverClassName}"/>
+        <property name="url" value="${ads.jdbc.url}"/>
+        <property name="username" value="${ads.jdbc.username}"/>
+        <property name="password" value="${ads.jdbc.password}"/>
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="10"/>
+        <property name="maxWait" value="100"/>
+        <property name="filters" value="stat"/>  <!-- 数据库监控 -->
+        <property name="validationQuery" value="SELECT user()"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="true"/>
+    </bean>
+    <bean id="adsJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name = "dataSource" ref="adsDataSource" />
+    </bean>
+
+    <!-- 配置数据源 -->
+    <bean name="rdsDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="driverClassName" value="${rds.jdbc.driverClassName}"/>
+        <property name="url" value="${rds.jdbc.url}"/>
+        <property name="username" value="${rds.jdbc.username}"/>
+        <property name="password" value="${rds.jdbc.password}"/>
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="10"/>
+        <property name="maxWait" value="100"/>
+        <property name="filters" value="stat"/>  <!-- 数据库监控 -->
+        <property name="validationQuery" value="SELECT user()"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="true"/>
+    </bean>
+
+    <bean id="rdsJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name = "dataSource" ref="rdsDataSource" />
+    </bean>
+
+
+    <!--spring声明式事务管理控制-->
+    <!--配置事务管理器类-->
+    <bean id="adsTxManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="adsDataSource"/>
+    </bean>
+
+    <bean id="rdsTxManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="rdsDataSource"/>
+    </bean>
+
+    <!--注解方式实现事务-->
+    <!--<tx:annotation-driven transaction-manager="adsTxManager"/>-->
+    <!--<tx:annotation-driven transaction-manager="rdsTxManager"/>-->
 
 </beans>

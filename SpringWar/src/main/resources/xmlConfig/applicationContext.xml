@@ -13,26 +13,13 @@
     <context:property-placeholder location="classpath:/properties/*.properties"/>
 
     <import resource="classpath:/xmlConfig/spring-db.xml"/>
+    <!--<import resource="classpath:/xmlConfig/spring-db-jta.xml"/>-->
+    <!--<import resource="classpath:/xmlConfig/spring-oracle-jta.xml"/>-->
     <!--<import resource="classpath:/xmlConfig/mongo-config.xml"/>-->
     <!--<import resource="classpath:/xmlConfig/spring-kafka-producer.xml"/>-->
     <!--<import resource="classpath:/xmlConfig/spring-kafka-consumer.xml" />-->
+    <!--<import resource="classpath:/xmlConfig/spring-redis.xml" />-->
     <import resource="classpath:/xmlConfig/spring-interceptor.xml"/>
 
-
-    <!-- redis start -->
-    <bean name="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
-        <property name="maxWaitMillis" value="${redis.generic.maxWaitMillis}"/>
-        <property name="maxTotal" value="${redis.generic.maxTotal}"/>
-        <property name="minIdle" value="${redis.generic.minIdle}"/>
-        <property name="maxIdle" value="${redis.generic.maxIdle}"/>
-    </bean>
-    <bean id="jedisClusterFactory" class="com.yany.common.redis.JedisClusterFactory"
-          init-method="init">
-        <property name="redisConnectList" value="${redis.connect.list}"/>
-        <property name="timeout" value="${redis.connect.timeout}"/>
-        <property name="maxRedirections" value="${redis.connect.maxRedirections}"/>
-        <property name="genericObjectPoolConfig" ref="genericObjectPoolConfig"/>
-    </bean>
-    <!-- redis end -->
 
 </beans>

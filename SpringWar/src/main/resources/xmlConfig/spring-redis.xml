@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+
+
+    <!-- redis start -->
+    <bean name="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+        <property name="maxWaitMillis" value="${redis.generic.maxWaitMillis}"/>
+        <property name="maxTotal" value="${redis.generic.maxTotal}"/>
+        <property name="minIdle" value="${redis.generic.minIdle}"/>
+        <property name="maxIdle" value="${redis.generic.maxIdle}"/>
+    </bean>
+    <bean id="jedisClusterFactory" class="com.yany.common.redis.JedisClusterFactory"
+          init-method="init">
+        <property name="redisConnectList" value="${redis.connect.list}"/>
+        <property name="timeout" value="${redis.connect.timeout}"/>
+        <property name="maxRedirections" value="${redis.connect.maxRedirections}"/>
+        <property name="genericObjectPoolConfig" ref="genericObjectPoolConfig"/>
+    </bean>
+    <!-- redis end -->
+</beans>

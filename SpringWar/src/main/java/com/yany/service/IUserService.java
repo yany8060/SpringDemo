@@ -9,6 +9,12 @@ import java.util.List;
  */
 public interface IUserService {
 
-    public List<UserModel> queryUsers();
+    List<UserModel> queryUsers();
+
+    void queryUserId();
+
+    void insertTest();
+
+    void multiInsertTest();
 
 }
